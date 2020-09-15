@@ -9,7 +9,8 @@ class Sample extends React.Component{
         super();
         this.state = {
             myName: 'Ray',
-            myAppointments: []
+            myAppointments: [],
+            lastIndex: 0
         }
     }
     componentDidMount(){
@@ -17,6 +18,8 @@ class Sample extends React.Component{
             .then(response => response.json())
             .then(result => {
                 const apts = result.map(items =>{
+                    items.aptId = this.state.lastIndex
+                    this.setState({lastIndex: this.state.lastIndex + 1})
                     return items
                 })
                 this.setState({
@@ -44,9 +47,9 @@ class Sample extends React.Component{
                             <div className="container">
                                 {/* <div>Add appointments</div> */}
                                 {this.state.myName}
-                                {listItems}
+                                {/* {listItems} */}
                                 <AddAppointment />
-                                <ListAppointment/>
+                                <ListAppointment Appoint = {this.state.myAppointments}/>
                                 <SearchAppointment/>
                             </div>
 
