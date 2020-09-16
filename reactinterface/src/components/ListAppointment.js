@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import {FaTimes} from 'react-icons/fa';
 import Moment from 'react-moment'
 
+
 class ListAppointment extends Component{
     render() {
         
-        const listItems =this.props.Appoint.map(item =>(
-            <div>
-                <div>{item.petName}</div>
-                <div>{item.ownerName}</div>
-            </div>
-        ))
+        // const listItems =this.props.Appoint.map(item =>(
+        //     <div>
+        //         <div>{item.petName}</div>
+        //         <div>{item.ownerName}</div>
+        //     </div>
+        // ))
         return (
         // <div>{listItems}</div>
 
@@ -18,7 +19,8 @@ class ListAppointment extends Component{
             {this.props.Appoint.map(item => (
             <div className="pet-item col media py-3" key = {item.aptId}>
             <div className="mr-3">
-                <button className="pet-delete btn btn-sm btn-danger">
+                <button className="pet-delete btn btn-sm btn-danger"
+                    onClick={()=> this.props.deleteAppointment(item)}>
                 <FaTimes/></button>
             </div>
 
@@ -36,7 +38,7 @@ class ListAppointment extends Component{
 
                 <div className="owner-name">
                 <span className="label-item">Owner: {item.ownerName} </span>
-                <span>ownerName</span>
+                {/* <span>ownerName</span> */}
                 </div>
                 <div className="apt-notes">aptNotes:
                 </div>
