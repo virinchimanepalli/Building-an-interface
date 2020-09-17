@@ -12,9 +12,12 @@ class Sample extends React.Component{
         this.state = {
             myName: 'Ray',
             myAppointments: [],
+            formDisplay: false,
             lastIndex: 0
         }
         this.deleteAppointment = this.deleteAppointment.bind(this);
+        this.toggleForm =this.toggleForm.bind(this)
+        this.addAppointment =this.addAppointment.bind(this)
     }
 
     deleteAppointment(apt) {
@@ -24,6 +27,26 @@ class Sample extends React.Component{
         this.setState({
           myAppointments: tempApts
         });
+      }
+
+      addAppointment(apt){
+          let tempApts = this.state.myAppointments;
+          apt.aptId = this.state.lastIndex
+          tempApts.unshift(apt);
+          this.setState({
+              myAppointments: tempApts,
+              lastIndex: this.state.lastIndex + 1
+          })
+
+
+      }
+
+
+      toggleForm(){
+          this.setState({
+              formDisplay: !this.state.formDisplay
+
+          })
       }
 
 
@@ -60,9 +83,11 @@ class Sample extends React.Component{
                         <div className="col-md-12 bg-white">
                             <div className="container">
                                 {/* <div>Add appointments</div> */}
-                                {this.state.myName}
+                                {/* {this.state.myName} */}
                                 {/* {listItems} */}
-                                <AddAppointment />
+                                <AddAppointment formDisplay={this.state.formDisplay}
+                                toggleForm={this.toggleForm}   
+                                addAppointment= {this.addAppointment} />
                                 <ListAppointment   
                                 Appoint={this.state.myAppointments}
                   deleteAppointment={this.deleteAppointment}/>
